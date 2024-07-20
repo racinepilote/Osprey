@@ -1,0 +1,39 @@
+services:
+  #  next:
+  #    container_name: next
+  #    image: next:1.0.0
+  #    build:
+  #      context: frontend
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - '3000:3000'
+  #    environment:
+  #      - NEXT_PUBLIC_API_URL=http://localhost:8000
+  #    depends_on:
+  #      - go
+  #  go:
+  #    container_name: go
+  #    image: go:1.0.0
+  #    build:
+  #      context: api
+  #      dockerfile: Dockerfile
+  #    environment:
+  #      DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres?sslmode=disable'
+  #    ports:
+  #      - '8000:8000'
+  #    depends_on:
+  #      - db
+  db:
+    container_name: db
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '!ChangeMe!'
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - eagle_pg_data:/var/lib/postgresql/data
+
+volumes:
+  eagle_pg_data: {}
